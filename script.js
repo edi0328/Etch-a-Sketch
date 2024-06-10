@@ -24,6 +24,7 @@ grid.addEventListener("mouseover", (e) => {
 
 })
 
+//Turn off hovering when mouse leaves
 grid.addEventListener("mouseout", (e) => {
     if (e.target.classList.contains("block")) {
         e.target.setAttribute("style", "background: white;");

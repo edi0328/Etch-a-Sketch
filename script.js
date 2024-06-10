@@ -1,33 +1,61 @@
 //Get grid div to add grid blocks
 
-const grid = document.querySelector("#grid");
-
+let grid = document.querySelector(".grid");
 
 //Create 16 divs x 16 divs
-for (let i = 0; i < 16; i++) {
-    const blockRow = document.createElement("div");
-    blockRow.setAttribute("class", "gridRow")
-    for (let j = 0; j < 16; j++) {
-        const block = document.createElement("div");
-        block.setAttribute("class", "block");
-        blockRow.appendChild(block);
+function createGrid(size, grid) {
+    for (let i = 0; i < size; i++) {
+        const blockRow = document.createElement("div");
+        blockRow.setAttribute("class", "gridRow")
+        for (let j = 0; j < size; j++) {
+            const block = document.createElement("div");
+            block.setAttribute("class", "block");
+            blockRow.appendChild(block);
+        }
+        grid.appendChild(blockRow);
     }
-    grid.appendChild(blockRow);
 }
 
-//For hovering effect
-grid.addEventListener("mouseover", (e) => {
-    if (e.target.classList.contains("block")) {
-        e.target.setAttribute("style", "background: red;")
-        e.stopPropagation();
-    }
+function makeHover(grid) {
+    //For hovering effect
+    grid.addEventListener("mouseover", (e) => {
+        if (e.target.classList.contains("block")) {
+            e.target.setAttribute("style", "background: red;")
+            e.stopPropagation();
+        }
 
-})
+    })
 
-//Turn off hovering when mouse leaves
-grid.addEventListener("mouseout", (e) => {
-    if (e.target.classList.contains("block")) {
-        e.target.setAttribute("style", "background: white;");
-        e.stopPropagation();
-    }
-})
+    //Turn off hovering when mouse leaves
+    grid.addEventListener("mouseout", (e) => {
+        if (e.target.classList.contains("block")) {
+            e.target.setAttribute("style", "background: white;");
+            e.stopPropagation();
+        }
+    })
+}
+
+function resizeGrid() {
+    let newSize;
+    do {
+        newSize = Number(prompt("How big do you want?"));
+    } while (!(newSize <= 100 && newSize > 0));
+    grid.remove();
+
+    const newGrid = document.createElement("div");
+    newGrid.setAttribute("class", "grid");
+
+    createGrid(newSize, newGrid);
+    const body = document.querySelector("body");
+    body.appendChild(newGrid);
+    grid = newGrid;
+    makeHover(grid);
+}
+
+
+createGrid(16, grid);
+makeHover(grid);
+
+const btn = document.querySelector("button");
+btn.onclick = resizeGrid;
+

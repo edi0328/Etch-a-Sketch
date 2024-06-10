@@ -2,6 +2,7 @@
 
 const grid = document.querySelector("#grid");
 
+
 //Create 16 divs x 16 divs
 for (let i = 0; i < 16; i++) {
     const blockRow = document.createElement("div");
@@ -21,4 +22,11 @@ grid.addEventListener("mouseover", (e) => {
         e.stopPropagation();
     }
 
+})
+
+grid.addEventListener("mouseout", (e) => {
+    if (e.target.classList.contains("block")) {
+        e.target.setAttribute("style", "background: white;");
+        e.stopPropagation();
+    }
 })

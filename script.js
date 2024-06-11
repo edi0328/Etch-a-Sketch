@@ -20,18 +20,10 @@ function makeHover(grid) {
     //For hovering effect
     grid.addEventListener("mouseover", (e) => {
         if (e.target.classList.contains("block")) {
-            e.target.setAttribute("style", "background: red;")
+            e.target.setAttribute("style", `background: rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}`)
             e.stopPropagation();
         }
 
-    })
-
-    //Turn off hovering when mouse leaves
-    grid.addEventListener("mouseout", (e) => {
-        if (e.target.classList.contains("block")) {
-            e.target.setAttribute("style", "background: white;");
-            e.stopPropagation();
-        }
     })
 }
 
